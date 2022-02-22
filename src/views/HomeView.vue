@@ -1,18 +1,36 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="container">
+    <div class="target" id="target">Vue Moveable</div>
+    <Moveable
+      className="moveable"
+      v-bind:target="['.target']"
+      v-bind:draggable="true"
+      v-bind:scalable="true"
+      v-bind:rotatable="true"
+      @drag="onDrag"
+      @scale="onScale"
+      @rotate="onRotate"
+    />
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import Moveable from "vue3-moveable";
 
 export default {
-  name: "HomeView",
+  name: "app",
   components: {
-    HelloWorld,
+    Moveable,
+  },
+  methods: {
+    onDrag({ transform }) {
+      document.getElementById("target").style.transform = transform;
+    },
+    onScale({ drag }) {
+      document.getElementById("target").style.transform = drag.transform;
+    },
+    onRotate({ drag }) {
+      document.getElementById("target").style.transform = drag.transform;
+    },
   },
 };
 </script>
